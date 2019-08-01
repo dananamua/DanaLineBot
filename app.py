@@ -32,9 +32,14 @@ def callback():
 #接著透過LineBotApi物件中reply_message()方法，回傳相同的訊息內容
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	print('執行TextMessage')
-	event.message.text
-	message = TextSendMessage(text='Hi!😯')
+	userSend = event.message.text
+
+	if userSend == 'Hi':
+		message = TextSendMessage(text='Hi!😯')
+	elif userSend == 'Goodbye':
+		message = TextSendMessage(text='See ya!🙃')
+	else:
+		message = TextSendMessage(text=userSend)
 	line_bot_api.reply_message(event.reply_token, message)
 
 @handler.add(MessageEvent, message=StickerMessage)
