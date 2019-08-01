@@ -38,9 +38,9 @@ def handle_message(event):
 	if userSend == 'Hi':
 		message = TextSendMessage(text='Hi {}! 😯'.format(userID))
 	elif userSend == 'Goodbye':
-		message = TextSendMessage(text='See ya! 🙃')
+		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 	else:
-		message = TextSendMessage(text=userSend)
+		message = StickerSendMessage(package_id='11539', sticker_id='52114129')
 	line_bot_api.reply_message(event.reply_token, message)
 
 @handler.add(MessageEvent, message=StickerMessage)
