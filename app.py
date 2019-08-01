@@ -33,11 +33,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	userSend = event.message.text
+	userID = event.source.user_id
 
 	if userSend == 'Hi':
-		message = TextSendMessage(text='Hi!😯')
+		message = TextSendMessage(text='Hi {}! 😯'.format(userID))
 	elif userSend == 'Goodbye':
-		message = TextSendMessage(text='See ya!🙃')
+		message = TextSendMessage(text='See ya! 🙃')
 	else:
 		message = TextSendMessage(text=userSend)
 	line_bot_api.reply_message(event.reply_token, message)
