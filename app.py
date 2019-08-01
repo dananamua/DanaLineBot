@@ -42,7 +42,7 @@ def handle_message(event):
 	elif userSend == 'Goodbye':
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 
-	elif:
+	else:
 		coin = twder.now(userSend)
 		message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,coin))		
 	#else:
