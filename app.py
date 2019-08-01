@@ -3,7 +3,7 @@ from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
-
+import twder
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('+c7Vg1Hrv/Ggg9aZd6ksYDu1qM1e5N0nkea7X3GXnCxHxOxwLcBPJ8ySu0q1c7uoDOiXWlVE01e1y1hFkiIV0HLkdpe6KPCUztdAUbH4TAQhPgS48CqOAwmvlBlVtF7DP4BPa+BaPGhVi5fJs2sdMAdB04t89/1O/w1cDnyilFU=')
 # 設定你的Channel Secret
 handler = WebhookHandler('c7b36ec108800b95651bc0012468d250')
-
+ 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -31,7 +31,7 @@ def callback():
 #處理訊息
 #當訊息種類為TextMessage時，從event中取出訊息內容，藉由TextSendMessage()包裝成符合格式的物件，並貼上message的標籤方便之後取用。
 #接著透過LineBotApi物件中reply_message()方法，回傳相同的訊息內容
-import twder
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	userSend = event.message.text
