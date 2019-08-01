@@ -43,7 +43,7 @@ def handle_message(event):
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 
 	elif:
-		coin = twder.now(userSend)[4]
+		coin = twder.now(userSend)
 		message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,coin))		
 	#else:
 		#message = StickerSendMessage(package_id='11539', sticker_id='52114129')
