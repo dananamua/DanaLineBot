@@ -3,6 +3,7 @@ from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
+
 import twder
 
 app = Flask(__name__)
@@ -45,7 +46,7 @@ def handle_message(event):
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 
 	elif userSend == currencies:
-		currency = twder.now(userSend)
+		currency = twder.now(userSend)[4]
 		message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,currency))		
 	else:
 		message = StickerSendMessage(package_id='11539', sticker_id='52114129')
