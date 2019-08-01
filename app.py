@@ -44,8 +44,8 @@ def handle_message(event):
 	elif userSend == 'Goodbye':
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 
-	elif userSend =='美金':
-		message = TextSendMessage(text=currencySearch('USD'))		
+	elif userSend in ['CNY', 'THB', 'SEK', 'USD', 'IDR', 'AUD', 'NZD', 'PHP', 'MYR', 'GBP', 'ZAR', 'CHF', 'VND', 'EUR', 'KRW', 'SGD', 'JPY', 'CAD', 'HKD']:
+		message = TextSendMessage(text=currencySearch(userSend))	
 
 	else:
 		message = StickerSendMessage(package_id='11539', sticker_id='52114129')
