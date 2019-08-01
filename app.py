@@ -3,7 +3,7 @@ from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
-import twder
+
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ def callback():
 	app.logger.info("Request body: " + body)
 	# handle webhook body
 	try:
-		handler.handle(body, signature)
+		handler.handle(body, sign ature)
 	except InvalidSignatureError:
 		abort(400)
 	return 'OK'
@@ -31,10 +31,12 @@ def callback():
 #處理訊息
 #當訊息種類為TextMessage時，從event中取出訊息內容，藉由TextSendMessage()包裝成符合格式的物件，並貼上message的標籤方便之後取用。
 #接著透過LineBotApi物件中reply_message()方法，回傳相同的訊息內容
+import twder
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	userSend = event.message.text
 	userID = event.source.user_id
+	currencies= twder.currencies()
 
 	if userSend == 'Hi':
 		message =TextSendMessage(text='Hi {}! 😯'.format(userID))
@@ -42,11 +44,11 @@ def handle_message(event):
 	elif userSend == 'Goodbye':
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 
+	elif userSend == currencies:
+		currency = twder.now(userSend)
+		message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,currency))		
 	else:
-		coin = twder.now(userSend)
-		message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,coin))		
-	#else:
-		#message = StickerSendMessage(package_id='11539', sticker_id='52114129')
+		message = StickerSendMessage(package_id='11539', sticker_id='52114129')
 
 	line_bot_api.reply_message(event.reply_token, message)
 
