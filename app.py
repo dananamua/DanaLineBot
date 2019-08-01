@@ -22,7 +22,7 @@ def callback():
 	app.logger.info("Request body: " + body)
 	# handle webhook body
 	try:
-		handler.handle(body, sign ature)
+		handler.handle(body, signature)
 	except InvalidSignatureError:
 		abort(400)
 	return 'OK'
