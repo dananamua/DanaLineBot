@@ -42,8 +42,11 @@ def handle_message(event):
 	elif userSend == 'Goodbye':
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
 
-	else:
-		message = StickerSendMessage(package_id='11539', sticker_id='52114129')
+	elif:
+		coin = twder.now(userSend)[4]
+		message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,coin))		
+	#else:
+		#message = StickerSendMessage(package_id='11539', sticker_id='52114129')
 
 	line_bot_api.reply_message(event.reply_token, message)
 
@@ -53,13 +56,7 @@ def handle_message(event):
 	message = TextSendMessage(text='Sorry cannot truly tell what you want to talk about☹️')
 	line_bot_api.reply_message(event.reply_token, message)
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-	userSend =event.message.text
-	print('執行StickerMessage')
-	coin = twder.now(userSend)[4]
-	message = TextSendMessage(text='{}的即期賣出價為:{}'.format(userSend,coin))
-	line_bot_api.reply_message(event.reply_token, message)
+
 
 import os
 if __name__ == "__main__":
