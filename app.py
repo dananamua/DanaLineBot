@@ -37,7 +37,6 @@ def callback():
 def handle_message(event):
 	userSend = event.message.text
 	userID = event.source.user_id
-	currencies= twder.currencies()
 
 	if userSend == 'Hi':
 		message =TextSendMessage(text='Hi {}! 😯'.format(userID))
@@ -47,7 +46,7 @@ def handle_message(event):
 
 	elif userSend =='美金':
 		message = TextSendMessage(text=currencySearch('USD'))		
-		
+
 	else:
 		message = StickerSendMessage(package_id='11539', sticker_id='52114129')
 
