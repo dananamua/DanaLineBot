@@ -6,7 +6,8 @@ import csv
 
 #前12個食物
 def foodSearch(): 
-	webContent = requests.get('https://www.instagram.com/howeat219/')
+	headers = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'}
+	webContent = requests.get('https://www.instagram.com/howeat219/',headers = headers)
 	firstSoup = BeautifulSoup(webContent.text,'html.parser')
 	firstdata = firstSoup.findAll('script',{'type':'text/javascript'})[3].text.split('window._sharedData = ')[1]
 	firstdata = firstdata[0:len(firstdata)-1]
@@ -101,7 +102,7 @@ def foodSearch():
 		replylist = ['something went wrong']
 	return replylist
 
-#print(foodSearch())
+print(foodSearch())
 	# print(locationlist)
 
 	
