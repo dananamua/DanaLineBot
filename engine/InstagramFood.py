@@ -1,10 +1,8 @@
-import imgkit
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
 import json
 import csv
-from geopy.distance import geodesic
+#from geopy.distance import geodesic
 
 #前12個食物
 def foodSearch(): 
