@@ -5,7 +5,7 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 from engine.currency import currencySearch
-
+from engine.InstagramFood import foodSearch
 app = Flask(__name__)
 
 # 設定你的Channel Access Token
@@ -40,6 +40,12 @@ def handle_message(event):
 
 	if userSend == 'Hi':
 		message =TextSendMessage(text='Hi {}! 😯'.format(userID))
+	elif userSend =='Food' or userSend =='food' or userSend =='食物':
+		reply = foodSearch()
+		replytext = ''
+		for shop in reply:
+			 replytext += shop
+		message = TextSendMessage(text=replytext)
 		
 	elif userSend == 'Goodbye':
 		message = TextSendMessage(text='See ya {}! 🙃'.format(userID))
