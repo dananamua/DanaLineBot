@@ -97,7 +97,8 @@ def foodSearch():
 				# locationlist.append(location.encode('utf-8').decode('utf-8-sig'))
 				index+=1
 	except:
-		replylist = [webContent.text]
+		print(webcontent.text)
+		replylist = ['something went wrong']
 	return replylist
 
 #print(foodSearch())
